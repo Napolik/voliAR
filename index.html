@@ -96,38 +96,41 @@
         </p>
       </div>
 
-      <form class="hero__form">
+      <main-form>
+      <form id="hero-form" class="hero__form">
+
           <div class="hero__field hero__field--full icon-point">
-            <input name="from" class="hero__input" type="text" placeholder="Звідки"/>
+            <custom-select data-name="from" type="text" placeholder="Звідки"></custom-select>
           </div>
           <div class="hero__field hero__field--full icon-point">
-            <input name="to" class="hero__input" type="text" placeholder="Куди"/>
+            <custom-select data-name="to" type="text" placeholder="Куди"></custom-select>
           </div>
 
           <div class="hero__triple-row">
             <div class="hero__field hero__field--third icon-point">
-              <input name="width" class="hero__input" type="text" placeholder="Ширина"/>
+              <input value='1' name="width" class="hero__input" type="text" placeholder="Ширина"/>
             </div>
             <div class="hero__field hero__field--third icon-point">
-              <input name="height" class="hero__input" type="text" placeholder="Висота"/>
+              <input value='1' name="height" class="hero__input" type="text" placeholder="Висота"/>
             </div>
             <div class="hero__field hero__field--third icon-point">
-              <input name="length" class="hero__input" type="text" placeholder="Довжина"/>
+              <input value='1' name="length" class="hero__input" type="text" placeholder="Довжина"/>
             </div>
           </div>
 
         <div class="hero__double-row">
           <div class="hero__field hero__field--half icon-point">
-            <input name="weight" class="hero__input" type="text" placeholder="Вага"/>
+            <input value='1' name="weight" class="hero__input" type="text" placeholder="Вага"/>
           </div>
           <div class="hero__field hero__field--half icon-point">
-            <input name="count" class="hero__input" type="text" placeholder="Кількість"/>
+            <input value='1' name="count" class="hero__input" type="text" placeholder="Кількість"/>
           </div>
         </div>
 
         <input type="submit" class="btn hero__button" value="Знайти кур’єра"/>
 
       </form>
+      </main-form>
 
     </div>
   </section>
