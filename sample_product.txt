@@ -1,0 +1,28 @@
+{"fast":[],"superfast":[],"noon":[],"morning":[],"standard":
+  [
+    {
+      "id":446,
+      "name":"Parcel to 1kg",
+      "carrierName":"UPS",
+      "serviceCode":"STANDARD",
+      "package": {"type":"PARCEL","name":"Parcel"},
+      "transport":{"code":"Road","name":"Road"},
+      "netPrice":44.02,
+      "grossPrice":54.15,
+      "netPriceStandard":null,
+      "grossPriceStandard":null,
+      "currency":"PLN",
+      "units":1,
+      "protocolAvailable":false,
+      "labels":["Road"],
+      "collectionTypes":["PICKUP","POINT"],
+      "carrierLogoLink":"https://www.globkurier.pl/images/kurier/min/19.png",
+      "discountCodeAllowed":false,
+      "customDocumentType":"PAPER",
+      "deliveryTime":"2023-12-11",\
+      "detailsLink":"https://www.globkurier.pl/cennik/przesylki-miedzynarodowe/ups#price",
+      "promo":null,
+      "hasCountryZoneRouting":false,
+      "onDemandDeliveryPointRequired":false
+    }
+  ]
