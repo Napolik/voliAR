@@ -104,7 +104,7 @@ class mainForm extends HTMLElement {
 
   async getProducts(responseText) {
     try {
-      const response = await fetch('https://test.api.globkurier.pl/v1' + responseText);
+      const response = await fetch('https://api.globkurier.pl/v1' + responseText);
       const data = await response.json();
 
       console.log(JSON.stringify(data));
