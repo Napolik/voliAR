@@ -103,6 +103,9 @@ class mainForm extends HTMLElement {
   }
 
   async getProducts(responseText) {
+    this.querySelector('.spinner').classList.remove('hidden');
+    this.querySelector('form').classList.add('hidden');
+
     try {
       const response = await fetch('https://api.globkurier.pl/v1' + responseText);
       const data = await response.json();
@@ -110,6 +113,10 @@ class mainForm extends HTMLElement {
       console.log(JSON.stringify(data));
     } catch (error) {
       console.error('Виникла помилка при отриманні даних:', error.message);
+    } finally {
+      // Приберіть індікатор завантаження після отримання відповіді
+      this.querySelector('.spinner').classList.add('hidden');
+      this.querySelector('form').classList.remove('hidden');
     }
 
   }
