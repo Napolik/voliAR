@@ -109,8 +109,20 @@ class mainForm extends HTMLElement {
     try {
       const response = await fetch('https://api.globkurier.pl/v1' + responseText);
       const data = await response.json();
+      const mainDialog = document.querySelector('#main');
+      const mainContent = document.querySelector('#main > .modal-dialog__content');
+      //const contentEl = document.createElement('div');
 
-      console.log(JSON.stringify(data));
+      mainContent.innerHTML = '';
+
+      if (this.isEmptyResponse(data)) {
+        mainContent.innerText = 'Варіантів доставки не існує';
+      } else {
+        mainContent.append(this.createProductCard(this.processData(data)));
+      }
+
+      mainDialog.show();
+
     } catch (error) {
       console.error('Виникла помилка при отриманні даних:', error.message);
     } finally {
@@ -121,6 +133,106 @@ class mainForm extends HTMLElement {
 
   }
 
+  isEmptyResponse(data) {
+    // Перевірка на порожню відповідь
+    return (
+      Object.keys(data).every(key => Array.isArray(data[key]) && data[key].length === 0)
+    );
+  }
+
+  processData(data) {
+    // Створення нового масиву об'єктів з необхідними полями
+    return data.standard.map(item => ({
+      id: item.id,
+      name: item.name,
+      carrierName: item.carrierName,
+      transport: item.transport ? item.transport.name : '',
+      grossPrice: item.grossPrice,
+      currency: item.currency,
+      carrierLogoLink: item.carrierLogoLink,
+      deliveryTime: item.deliveryTime
+    }));
+  }
+
+  createProductCard(processedData) {
+    const containerEl = document.createElement('div');
+
+    processedData.forEach(product => {
+      const cardEl = document.createElement('div');
+      const imageWrapEl = document.createElement('div');
+      const imageEl = document.createElement('img');
+
+
+      imageEl.src = product.carrierLogoLink;
+      containerEl.classList.add('results__cards');
+      cardEl.classList.add('results__card');
+      imageEl.classList.add('results__card-image');
+      imageWrapEl.classList.add('results__card-image-wrapper');
+
+      imageWrapEl.append(imageEl);
+      cardEl.append(imageWrapEl);
+      containerEl.append(cardEl);
+    });
+
+    return containerEl;
+  }
+
 }
 
 customElements.define('main-form', mainForm);
+
+class ModalDialog extends HTMLElement {
+  constructor() {
+    super();
+
+    this.closeButton = this.querySelector('button.close');
+  }
+
+  connectedCallback() {
+    this.closeButton.addEventListener('click', () => {
+      this.hide();
+    });
+  }
+
+  blockScroll() {
+    document.querySelector('body').style.overflow = "hidden";
+  }
+
+  unblockScroll() {
+    document.querySelector('body').style.overflow = "visible";
+  }
+
+  show() {
+    this.setAttribute("aria-expanded", true);
+    //this.blockScroll();
+  }
+
+  hide() {
+    this.setAttribute("aria-expanded", false);
+    //this.unblockScroll();
+  }
+}
+
+customElements.define('modal-dialog', ModalDialog);
+
+
+class ModalOpener extends HTMLElement {
+  constructor() {
+    super();
+
+    const button = this.querySelector('button');
+    const modal = this.getAttribute('data-modal');
+    this.dialog = document.querySelector('#' + modal);
+
+    if (!button) return;
+    button.addEventListener('click', () => {
+      if (this.dialog.getAttribute("aria-expanded") === 'false') {
+        this.dialog.show();
+      } else {
+        this.dialog.hide();
+      }
+    });
+  }
+}
+
+customElements.define('modal-opener', ModalOpener);
