@@ -38,7 +38,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  //overflow-x: hidden;
 }
 
 /*
@@ -137,6 +137,7 @@ textarea {
   visibility: visible;
   transform: translate(0,0);
   transition: opacity .6s ease,transform .6s ease,visibility 0s;
+  width: calc(100% - 80px) !important;
   opacity: 1;
   z-index: 5;
 }
@@ -154,8 +155,7 @@ textarea {
 .modal-dialog {
   position: absolute;
   background: var(--color-white);
-  width: calc(100% - 80px);
-  min-height: 80vh;
+  width: 0;
   margin: 0 40px;
   top: 100px;
 }
@@ -459,7 +459,7 @@ textarea {
 }
 
 .hero__field--full {
-  max-width: 410px;
+  max-width: 440px;
 }
 
 .hero__field--half {
@@ -567,15 +567,13 @@ textarea {
 
 .results__card {
   width: 100%;
-  max-width: calc(100vw/3 - 60px);
+  max-width: calc(100vw/3.6 - 60px);
   background: var(--color-white) url("../img/triangle.png") top no-repeat;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   border-radius: 15px;
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
   padding: 0 0 20px 0;
-  height: 400px;
 }
 
 .results__card-image-wrapper {

@@ -111,7 +111,6 @@ class mainForm extends HTMLElement {
       const data = await response.json();
       const mainDialog = document.querySelector('#main');
       const mainContent = document.querySelector('#main > .modal-dialog__content');
-      //const contentEl = document.createElement('div');
 
       mainContent.innerHTML = '';
 
@@ -156,21 +155,54 @@ class mainForm extends HTMLElement {
 
   createProductCard(processedData) {
     const containerEl = document.createElement('div');
+    const headingEl = document.createElement('h2');
 
     processedData.forEach(product => {
       const cardEl = document.createElement('div');
       const imageWrapEl = document.createElement('div');
       const imageEl = document.createElement('img');
+      const listEl = document.createElement('ul');
+      const nameEl = document.createElement('li');
+      const carrierNameEl = document.createElement('li');
+      const transportEl = document.createElement('li');
+      const grossPriceEl = document.createElement('li');
+      const deliveryTimeEl = document.createElement('li');
+      const submitEl = document.createElement('button');
+
+
+      containerEl.classList.add('results__cards');
+      cardEl.classList.add('results__card');
+      listEl.classList.add('results__benefits');
+      imageEl.classList.add('results__card-image');
+      imageWrapEl.classList.add('results__card-image-wrapper');
+      nameEl.classList.add('results__benefit');
+      carrierNameEl.classList.add('results__benefit');
+      transportEl.classList.add('results__benefit');
+      grossPriceEl.classList.add('results__benefit');
+      deliveryTimeEl.classList.add('results__benefit');
+      submitEl.classList.add('btn', 'result__button');
 
 
       imageEl.src = product.carrierLogoLink;
-      containerEl.classList.add('results__cards');
-      cardEl.classList.add('results__card');
-      imageEl.classList.add('results__card-image');
-      imageWrapEl.classList.add('results__card-image-wrapper');
+      nameEl.textContent = product.name;
+      carrierNameEl.textContent = product.carrierName;
+      transportEl.textContent = 'Transport: ' + product.transport;
+      grossPriceEl.textContent = 'Price: ' + product.grossPrice + ' ' + product.currency;
+      submitEl.innerText = 'Order a carrier';
+
+      if (product.deliveryTime) {
+        deliveryTimeEl.textContent = 'Delivery time: ' + product.deliveryTime;
+        listEl.append(deliveryTimeEl);
+      }
 
       imageWrapEl.append(imageEl);
+      listEl.append(nameEl);
+      listEl.append(carrierNameEl);
+      listEl.append(transportEl);
+      listEl.append(grossPriceEl);
       cardEl.append(imageWrapEl);
+      cardEl.append(listEl);
+      cardEl.append(submitEl);
       containerEl.append(cardEl);
     });
 
